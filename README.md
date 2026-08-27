@@ -32,7 +32,7 @@
 |---|---|---|---|---|---|---|---|
 | [SiliconFlow 硅基流动](https://siliconflow.cn/) | `直连✓` | 注册赠送体验金，另有多个常驻免费小模型（Qwen/GLM 小尺寸等）† | ❌ 不可用 | — | — | `SILICONFLOW_API_KEY` | [注册](https://cloud.siliconflow.cn/account/ak) |
 | [ModelScope 魔搭社区](https://www.modelscope.cn/) | `直连✓` | 每日免费推理调用次数（刷新制），开源模型数量多，国内访问友好 | ❌ 不可用 | — | — | `MODELSCOPE_TOKEN` | [注册](https://www.modelscope.cn/my/myaccesstoken) |
-| [智谱 BigModel 开放平台](https://open.bigmodel.cn/) | `直连✓` | glm-4-flash 等轻量模型长期免费调用 | ❌ 不可用 | — | — | `ZHIPU_API_KEY` | [注册](https://open.bigmodel.cn/usercenter/apikeys) |
+| [智谱 BigModel 开放平台](https://bigmodel.cn/) | `直连✓` | glm-4-flash 等轻量模型长期免费调用 | ❌ 不可用 | — | — | `ZHIPU_API_KEY` | [注册](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
 | [阿里云百炼 DashScope](https://www.aliyun.com/product/bailian) | `直连✓` | 新用户各主流模型均有限时免费额度，部分通义小模型有常驻免费档† | ❌ 不可用 | — | — | `DASHSCOPE_API_KEY` | [注册](https://bailian.console.aliyun.com/?apiKey=1) |
 | [百度千帆 ModelBuilder](https://qianfan.cloud.baidu.com/) | `直连✓` | 部分文心及开源模型提供限时免费试用额度（随活动变化，以控制台为准）† | ❌ 不可用 | — | — | `QIANFAN_API_KEY` | [注册](https://console.bce.baidu.com/iam/#/iam/apikey/list) |
 
@@ -44,7 +44,7 @@
 | [OpenRouter (:free 模型)](https://openrouter.ai/) | `需国际网络` | 带 :free 后缀的模型可免费调用（每日限额）；需注册并配置 API Key，2026-08 实测匿名调用已返回 401 | ❌ 不可用 | — | — | `OPENROUTER_API_KEY` | [注册](https://openrouter.ai/settings/keys) |
 | [Groq Cloud](https://groq.com/) | `需国际网络` | 开发者免费层，速率受限但长期可用，推理速度极快 | ❌ 不可用 | — | — | `GROQ_API_KEY` | [注册](https://console.groq.com/keys) |
 | [Cerebras Inference](https://cloud.cerebras.ai/) | `需国际网络` | 免费层提供每日较大 token 配额，主打超高速推理 | ❌ 不可用 | — | — | `CEREBRAS_API_KEY` | [注册](https://cloud.cerebras.ai/) |
-| [Mistral La Plateforme](https://mistral.ai/) | `需国际网络` | Experiment 免费计划（需在控制台选择加入），有速率限制 | ❌ 不可用 | — | — | `MISTRAL_API_KEY` | [注册](https://console.mistral.ai/api-keys) |
+| [Mistral La Plateforme](https://mistral.ai/) | `需国际网络` | 免费模式默认开启（无需信用卡），有限速；在 Studio 控制台创建 API Key | ❌ 不可用 | — | — | `MISTRAL_API_KEY` | [注册](https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key) |
 | [NVIDIA NIM (build.nvidia.com)](https://build.nvidia.com/) | `需国际网络` | 开发者计划赠送大量推理调用额度，开源模型家族齐全 | ❌ 不可用 | — | — | `NVIDIA_API_KEY` | [注册](https://build.nvidia.com/explore/discover) |
 | [GitHub Models](https://github.com/marketplace/models) | `需国际网络` | 任意 GitHub 账号可用 PAT 调用多家主流模型，按账号等级限速，免额外注册 | ⚪ 待密钥 | — | — | `GITHUB_MODELS_TOKEN` | [注册](https://github.com/settings/tokens) |
 | [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers) | `需国际网络` | 所有注册用户每月附带少量免费推理 credit（约一周量级的轻度使用），超出后走付费 | ❌ 不可用 | — | — | `HF_TOKEN` | [注册](https://huggingface.co/settings/tokens) |
