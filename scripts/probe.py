@@ -134,12 +134,7 @@ def main():
     usable = sum(1 for e in results
                  if e["state"] in ("ok", "anon_ok", "rate_limited"))
     total = len(results)
-    (DATA / "badge.json").write_text(json.dumps({
-        "schemaVersion": 1,
-        "label": "quota radar",
-        "message": f"{usable}/{total} alive ({ok_n} verified)",
-        "color": "brightgreen" if ok_n else ("yellow" if usable else "red"),
-    }, ensure_ascii=False) + "\n")
+    # 徽章由 render.py 统一生成（badge-alive / badge-sweep）
     print(f"\n可用 {usable}/{total}（其中实弹验证 {ok_n}），结果已写入 data/")
 
 

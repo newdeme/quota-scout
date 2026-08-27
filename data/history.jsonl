@@ -41,3 +41,4 @@
 {"id": "dashscope-bailian", "ts": "2026-08-27T05:00:59Z", "state": "no_key", "detail": "未配置 DASHSCOPE_API_KEY"}
 {"id": "qianfan", "ts": "2026-08-27T05:00:59Z", "state": "no_key", "detail": "未配置 QIANFAN_API_KEY"}
 {"id": "workers-ai", "ts": "2026-08-27T05:00:59Z", "state": "no_probe", "detail": "手册收录（暂无自动探活）"}
+{"id": "github-models", "ts": "2026-08-27T05:03:09Z", "state": "no_key", "detail": "未配置 GITHUB_MODELS_TOKEN"}
