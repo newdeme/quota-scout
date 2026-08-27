@@ -130,9 +130,9 @@ svg.append(f'<text x="{CX}" y="{CY - 8}" text-anchor="middle" '
 svg.append(f'<text x="{CX}" y="{CY + 14}" text-anchor="middle" font-family="sans-serif" '
            f'font-size="11" fill="#64748B">{usable}/{total} alive · {gen_at[:10]}</text>')
 svg.append("</svg>")
-docs = ROOT / "docs"
-docs.mkdir(exist_ok=True)
-(docs / "radar.svg").write_text("\n".join(svg) + "\n")
+assets = ROOT / "assets"
+assets.mkdir(exist_ok=True)
+(assets / "radar.svg").write_text("\n".join(svg) + "\n")
 
 print(f"README 已更新：国内 {len(groups['cn'])} + 国际 {len(groups['intl'])} 渠道；"
       f"radar.svg / badge-*.json 已生成")

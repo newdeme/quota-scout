@@ -16,7 +16,7 @@
 </p>
 -->
 
-<img src="docs/radar.svg" width="340" alt="quota-scout 探活雷达图：每个光点是一个免费渠道，距离圆心越近延迟越低，菱形框=国内直连，圆形=国际">
+<img src="assets/radar.svg" width="340" alt="quota-scout 探活雷达图：每个光点是一个免费渠道，距离圆心越近延迟越低，菱形框=国内直连，圆形=国际">
 
 </div>
 
