@@ -24,9 +24,10 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
 STATE_ORDER = ["ok", "anon_ok", "rate_limited", "no_key", "auth_invalid",
-               "bad_model", "quota_out", "down"]
+               "bad_model", "quota_out", "down", "retired"]
 ICON = {"ok": "✅", "anon_ok": "🟢", "rate_limited": "🟡", "no_key": "⚪",
-        "auth_invalid": "🔑", "bad_model": "🏷️", "quota_out": "💸", "down": "❌"}
+        "auth_invalid": "🔑", "bad_model": "🏷️", "quota_out": "💸",
+        "down": "❌", "retired": "🪦"}
 
 
 def load_env_file(path: Path) -> dict:
@@ -81,6 +82,9 @@ def probe_openai_chat(ch: dict, keys: dict, timeout_s: int) -> dict:
         if e.code in (402,):
             return {"state": "quota_out", "latency_ms": latency,
                     "detail": "402 额度不足"}
+        if e.code == 410 or "retir" in snippet.lower():
+            return {"state": "retired", "latency_ms": latency,
+                    "detail": f"{detail} 官方退役/brownout"}
         if e.code == 404 or "model" in snippet.lower():
             return {"state": "bad_model", "latency_ms": latency,
                     "detail": detail}

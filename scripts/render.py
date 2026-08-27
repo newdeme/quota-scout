@@ -9,10 +9,11 @@ START, END = "<!-- RADAR:START -->", "<!-- RADAR:END -->"
 
 ICON = {"ok": "✅", "anon_ok": "🟢", "rate_limited": "🟡", "no_key": "⚪",
         "auth_invalid": "🔑", "bad_model": "🏷️", "quota_out": "💸",
-        "down": "❌", "no_probe": "📖"}
+        "down": "❌", "retired": "🪦", "no_probe": "📖"}
 STATE_CN = {"ok": "验证可用", "anon_ok": "匿名可用", "rate_limited": "限流(服务正常)",
             "no_key": "待密钥", "auth_invalid": "密钥无效", "bad_model": "模型待更新",
-            "quota_out": "额度耗尽", "down": "不可用", "no_probe": "收录未探测"}
+            "quota_out": "额度耗尽", "down": "不可用", "retired": "官方退役",
+            "no_probe": "收录未探测"}
 
 readme = ROOT / "README.md"
 conf = json.loads((ROOT / "data" / "channels.json").read_text())
@@ -72,7 +73,7 @@ for k, v in badges.items():
         json.dumps(v, ensure_ascii=False) + "\n")
 
 # ---------- 雷达 SVG ----------
-C = {"ok": "#22C55E", "anon_ok": "#4ADE80", "rate_limited": "#FBBF24",
+C = {"retired": "#94A3B8", "ok": "#22C55E", "anon_ok": "#4ADE80", "rate_limited": "#FBBF24",
      "auth_invalid": "#94A3B8", "no_key": "#CBD5E1", "bad_model": "#F97316",
      "quota_out": "#FB7185", "down": "#F87171", "no_probe": "#E2E8F0"}
 SIZE, R = 440, 178

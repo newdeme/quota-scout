@@ -117,7 +117,7 @@
       "key_signup": "https://github.com/settings/tokens",
       "key_env": "GITHUB_MODELS_TOKEN",
       "anonymous": false,
-      "free_tier": "任意 GitHub 账号可用 PAT 调用多家主流模型，按账号等级限速，免额外注册",
+      "free_tier": "任意 GitHub 账号可用 PAT 调用多家主流模型。【2026-08-27 实测：平台进入退役 brownout（HTTP 410），即将下线，新用户勿再依赖】",
       "probe": {
         "kind": "openai_chat",
         "base_url": "https://models.github.ai/inference/chat/completions",
