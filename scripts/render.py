@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""把 data/results.json 渲染进 README.md 的标记区间。零依赖。"""
+"""把 data/results.json 渲染进 README.md 标记区间，并生成 docs/radar.svg 与徽章 JSON。零依赖。"""
 import json
-from datetime import datetime
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -19,27 +19,119 @@ conf = json.loads((ROOT / "data" / "channels.json").read_text())
 results = {r["id"]: r for r in json.loads(
     (ROOT / "data" / "results.json").read_text())["results"]}
 
-cat_cn = {"intl": "国际", "cn": "国内"}
-rows = []
-for ch in conf["channels"]:
+
+def row(ch: dict) -> str:
     r = results.get(ch["id"], {})
     state = r.get("state", "down")
     lat = r.get("latency_ms")
-    probed = state not in ("no_key",)
-    rows.append(
-        f"| [{ch['name']}]({ch['home']}) | {cat_cn[ch['category']]} "
-        f"| {ch['free_tier']} | {ICON[state]} {STATE_CN[state]} "
-        f"| {str(lat)+' ms' if lat else '—'} | {r.get('ts', '—') if probed else '—'} "
-        f"| `{ch.get('key_env') or '—'}` | [注册]({ch['key_signup']}) |")
+    probed = state not in ("no_key", "no_probe")
+    net = "直连✓" if ch["cn_access"] == "direct" else "需国际网络"
+    dagger = "†" if ch.get("bonus_once") else ""
+    name = f"[{ch['name']}]({ch['home']})"
+    return (f"| {name} | `{net}` | {ch['free_tier']}{dagger} "
+            f"| {ICON[state]} {STATE_CN[state]} "
+            f"| {str(lat)+' ms' if lat else '—'} "
+            f"| {r.get('ts', '—') if probed else '—'} "
+            f"| `{ch.get('key_env') or '—'}` | [注册]({ch['key_signup']}) |")
 
-table = (
-    "| 渠道 | 分类 | 免费方式（快照，以官方为准） | 状态 | 延迟 | 最后探测 (UTC) | 密钥变量 | 注册 |\n"
-    "|---|---|---|---|---|---|---|---|\n"
-    + "\n".join(rows))
+
+HEAD = ("| 渠道 | 网络 | 免费方式（快照，以官方为准） | 状态 | 延迟 "
+        "| 最后探测 (UTC) | 密钥变量 | 注册 |\n"
+        "|---|---|---|---|---|---|---|---|")
+groups = {"cn": [c for c in conf["channels"] if c["cn_access"] == "direct"],
+          "intl": [c for c in conf["channels"] if c["cn_access"] == "intl"]}
+sections = [
+    ("### 🇨🇳 国内额度 · 大陆直连优先", groups["cn"]),
+    ("### 🌍 国际额度 · 多数需国际网络", groups["intl"]),
+]
+table_md = "\n\n".join(
+    title + "\n\n" + HEAD + "\n" + "\n".join(row(c) for c in chans)
+    for title, chans in sections if chans)
 
 text = readme.read_text()
 assert START in text and END in text, "README 缺少 RADAR 标记区间"
 head, _, rest = text.partition(START)
 _, _, tail = rest.partition(END)
-readme.write_text(head + START + "\n" + table + "\n" + END + tail)
-print(f"README 已更新：{len(rows)} 个渠道")
+readme.write_text(head + START + "\n" + table_md + "\n" + END + tail)
+
+# ---------- 动态徽章 ----------
+ok_n = sum(1 for e in results.values() if e["state"] in ("ok", "anon_ok"))
+usable = sum(1 for e in results.values()
+             if e["state"] in ("ok", "anon_ok", "rate_limited"))
+total = len(conf["channels"])
+gen_at = next(iter(results.values()), {}).get("ts", "—")
+badges = {
+    "alive": {"schemaVersion": 1, "label": "scout sweep",
+              "message": f"{usable}/{total} alive",
+              "color": "brightgreen" if ok_n else ("yellow" if usable else "red")},
+    "sweep": {"schemaVersion": 1, "label": "last sweep",
+              "message": gen_at.replace("T", " ")[:17] + " UTC", "color": "blue"},
+}
+for k, v in badges.items():
+    (ROOT / "data" / f"badge-{k}.json").write_text(
+        json.dumps(v, ensure_ascii=False) + "\n")
+
+# ---------- 雷达 SVG ----------
+C = {"ok": "#22C55E", "anon_ok": "#4ADE80", "rate_limited": "#FBBF24",
+     "auth_invalid": "#94A3B8", "no_key": "#CBD5E1", "bad_model": "#F97316",
+     "quota_out": "#FB7185", "down": "#F87171", "no_probe": "#E2E8F0"}
+SIZE, R = 440, 178
+CX = CY = SIZE / 2
+
+
+def blip(ch, idx, n):
+    ang = -90 + idx * 360 / n
+    r = results.get(ch["id"], {})
+    state, lat = r.get("state", "down"), r.get("latency_ms")
+    if lat is None:
+        dist, hole = 0.18 * R, True
+    elif lat < 800:
+        dist, hole = 0.36 * R, False
+    elif lat < 2000:
+        dist, hole = 0.63 * R, False
+    else:
+        dist, hole = 0.9 * R, False
+    x = CX + dist * math.cos(math.radians(ang))
+    y = CY + dist * math.sin(math.radians(ang))
+    col = C[state]
+    parts = [f'<circle cx="{x:.1f}" cy="{y:.1f}" r="7" fill="{col}" '
+             f'fill-opacity="{0.25 if hole else 1}" stroke="{col}" stroke-width="2"/>']
+    # 国内=菱形外框；国际=纯圆 —— 形状区分分组，不引入第二色相
+    if ch["cn_access"] == "direct":
+        parts.append(f'<rect x="-6" y="-6" width="12" height="12" transform='
+                     f'"translate({x:.1f},{y:.1f}) rotate(45)" fill="none" '
+                     f'stroke="{col}" stroke-width="1.6"/>')
+    return "".join(parts)
+
+
+ordered = groups["cn"] + groups["intl"]
+n = len(ordered)
+sweep_deg = 42
+sweep_end_x = CX + R * math.cos(math.radians(-90 + sweep_deg))
+sweep_end_y = CY + R * math.sin(math.radians(-90 + sweep_deg))
+svg = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{SIZE}" height="{SIZE}" '
+       f'viewBox="0 0 {SIZE} {SIZE}">']
+svg.append(f'<path d="M{CX},{CY} L{CX},{CY - R} A{R},{R} 0 0 1 '
+           f'{sweep_end_x:.1f},{sweep_end_y:.1f} Z" fill="#22C55E" fill-opacity="0.06"/>'
+           f'<line x1="{CX}" y1="{CY}" x2="{CX}" y2="{CY - R}" '
+           f'stroke="#22C55E" stroke-opacity="0.55" stroke-width="1.5"/>')
+for frac in (0.33, 0.66, 1.0):
+    svg.append(f'<circle cx="{CX}" cy="{CY}" r="{R * frac:.0f}" fill="none" '
+               f'stroke="#64748B" stroke-opacity="0.30"/>')
+svg.append(f'<line x1="{CX - R}" y1="{CY}" x2="{CX + R}" y2="{CY}" '
+           f'stroke="#64748B" stroke-opacity="0.15"/>')
+svg.append(f'<line x1="{CX}" y1="{CY - R}" x2="{CX}" y2="{CY + R}" '
+           f'stroke="#64748B" stroke-opacity="0.15"/>')
+svg.extend(blip(ch, i, n) for i, ch in enumerate(ordered))
+svg.append(f'<text x="{CX}" y="{CY - 8}" text-anchor="middle" '
+           f'font-family="ui-monospace,Menlo,monospace" font-size="13" '
+           f'letter-spacing="3" fill="#94A3B8">QUOTA·SCOUT</text>')
+svg.append(f'<text x="{CX}" y="{CY + 14}" text-anchor="middle" font-family="sans-serif" '
+           f'font-size="11" fill="#64748B">{usable}/{total} alive · {gen_at[:10]}</text>')
+svg.append("</svg>")
+docs = ROOT / "docs"
+docs.mkdir(exist_ok=True)
+(docs / "radar.svg").write_text("\n".join(svg) + "\n")
+
+print(f"README 已更新：国内 {len(groups['cn'])} + 国际 {len(groups['intl'])} 渠道；"
+      f"radar.svg / badge-*.json 已生成")

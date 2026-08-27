@@ -15,7 +15,9 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         "model": "gemini-2.5-flash-lite",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "openrouter",
@@ -31,7 +33,9 @@
         "base_url": "https://openrouter.ai/api/v1/chat/completions",
         "model": "meta-llama/llama-3.3-70b-instruct:free",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "groq",
@@ -47,7 +51,9 @@
         "base_url": "https://api.groq.com/openai/v1/chat/completions",
         "model": "llama-3.3-70b-versatile",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "cerebras",
@@ -63,7 +69,9 @@
         "base_url": "https://api.cerebras.ai/v1/chat/completions",
         "model": "llama-3.3-70b",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "mistral",
@@ -79,7 +87,9 @@
         "base_url": "https://api.mistral.ai/v1/chat/completions",
         "model": "mistral-small-latest",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "nvidia-nim",
@@ -95,7 +105,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "model": "meta/llama-3.3-70b-instruct",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "github-models",
@@ -111,7 +123,9 @@
         "base_url": "https://models.github.ai/inference/chat/completions",
         "model": "openai/gpt-4o-mini",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "huggingface-router",
@@ -127,7 +141,9 @@
         "base_url": "https://router.huggingface.co/v1/chat/completions",
         "model": "meta-llama/Llama-3.3-70B-Instruct",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "intl",
+      "bonus_once": false
     },
     {
       "id": "siliconflow",
@@ -143,7 +159,9 @@
         "base_url": "https://api.siliconflow.cn/v1/chat/completions",
         "model": "Qwen/Qwen2.5-7B-Instruct",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "direct",
+      "bonus_once": true
     },
     {
       "id": "modelscope",
@@ -159,7 +177,9 @@
         "base_url": "https://api-inference.modelscope.cn/v1/chat/completions",
         "model": "Qwen/Qwen2.5-7B-Instruct",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "direct",
+      "bonus_once": false
     },
     {
       "id": "zhipu-bigmodel",
@@ -175,7 +195,9 @@
         "base_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
         "model": "glm-4-flash",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "direct",
+      "bonus_once": false
     },
     {
       "id": "dashscope-bailian",
@@ -191,7 +213,9 @@
         "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
         "model": "qwen-turbo",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "direct",
+      "bonus_once": true
     },
     {
       "id": "qianfan",
@@ -207,7 +231,9 @@
         "base_url": "https://qianfan.baidubce.com/v2/chat/completions",
         "model": "ernie-speed-128k",
         "max_tokens": 8
-      }
+      },
+      "cn_access": "direct",
+      "bonus_once": true
     },
     {
       "id": "workers-ai",
@@ -218,7 +244,9 @@
       "key_env": "CF_WORKERS_AI_TOKEN",
       "anonymous": false,
       "free_tier": "每日免费 neuron 分配，可在 Workers 内或 REST 调用多模态开源模型",
-      "probe": null
+      "probe": null,
+      "cn_access": "intl",
+      "bonus_once": false
     }
   ]
 }
