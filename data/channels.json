@@ -1,0 +1,224 @@
+{
+  "$note": "模型 ID 与额度描述为 2026-08 撰写时快照，失效时请直接修改本文件。合规原则：只收录官方公开的免费/试用额度，不收录逆向 Web 转 API 类灰色渠道。",
+  "channels": [
+    {
+      "id": "google-ai-studio",
+      "name": "Google AI Studio (Gemini API)",
+      "category": "intl",
+      "home": "https://aistudio.google.com/",
+      "key_signup": "https://aistudio.google.com/apikey",
+      "key_env": "GEMINI_API_KEY",
+      "anonymous": false,
+      "free_tier": "有永久免费层，按模型设每日/每分钟限额，适合个人体验与小规模开发",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        "model": "gemini-2.5-flash-lite",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter (:free 模型)",
+      "category": "intl",
+      "home": "https://openrouter.ai/",
+      "key_signup": "https://openrouter.ai/settings/keys",
+      "key_env": "OPENROUTER_API_KEY",
+      "anonymous": false,
+      "free_tier": "带 :free 后缀的模型可免费调用（每日限额）；需注册并配置 API Key，2026-08 实测匿名调用已返回 401",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://openrouter.ai/api/v1/chat/completions",
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "groq",
+      "name": "Groq Cloud",
+      "category": "intl",
+      "home": "https://groq.com/",
+      "key_signup": "https://console.groq.com/keys",
+      "key_env": "GROQ_API_KEY",
+      "anonymous": false,
+      "free_tier": "开发者免费层，速率受限但长期可用，推理速度极快",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "cerebras",
+      "name": "Cerebras Inference",
+      "category": "intl",
+      "home": "https://cloud.cerebras.ai/",
+      "key_signup": "https://cloud.cerebras.ai/",
+      "key_env": "CEREBRAS_API_KEY",
+      "anonymous": false,
+      "free_tier": "免费层提供每日较大 token 配额，主打超高速推理",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://api.cerebras.ai/v1/chat/completions",
+        "model": "llama-3.3-70b",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral La Plateforme",
+      "category": "intl",
+      "home": "https://mistral.ai/",
+      "key_signup": "https://console.mistral.ai/api-keys",
+      "key_env": "MISTRAL_API_KEY",
+      "anonymous": false,
+      "free_tier": "Experiment 免费计划（需在控制台选择加入），有速率限制",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://api.mistral.ai/v1/chat/completions",
+        "model": "mistral-small-latest",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "nvidia-nim",
+      "name": "NVIDIA NIM (build.nvidia.com)",
+      "category": "intl",
+      "home": "https://build.nvidia.com/",
+      "key_signup": "https://build.nvidia.com/explore/discover",
+      "key_env": "NVIDIA_API_KEY",
+      "anonymous": false,
+      "free_tier": "开发者计划赠送大量推理调用额度，开源模型家族齐全",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "model": "meta/llama-3.3-70b-instruct",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "github-models",
+      "name": "GitHub Models",
+      "category": "intl",
+      "home": "https://github.com/marketplace/models",
+      "key_signup": "https://github.com/settings/tokens",
+      "key_env": "GITHUB_MODELS_TOKEN",
+      "anonymous": false,
+      "free_tier": "任意 GitHub 账号可用 PAT 调用多家主流模型，按账号等级限速，免额外注册",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://models.github.ai/inference/chat/completions",
+        "model": "openai/gpt-4o-mini",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "huggingface-router",
+      "name": "Hugging Face Inference Providers",
+      "category": "intl",
+      "home": "https://huggingface.co/docs/inference-providers",
+      "key_signup": "https://huggingface.co/settings/tokens",
+      "key_env": "HF_TOKEN",
+      "anonymous": false,
+      "free_tier": "所有注册用户每月附带少量免费推理 credit（约一周量级的轻度使用），超出后走付费",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://router.huggingface.co/v1/chat/completions",
+        "model": "meta-llama/Llama-3.3-70B-Instruct",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "siliconflow",
+      "name": "SiliconFlow 硅基流动",
+      "category": "cn",
+      "home": "https://siliconflow.cn/",
+      "key_signup": "https://cloud.siliconflow.cn/account/ak",
+      "key_env": "SILICONFLOW_API_KEY",
+      "anonymous": false,
+      "free_tier": "注册赠送体验金，另有多个常驻免费小模型（Qwen/GLM 小尺寸等）",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://api.siliconflow.cn/v1/chat/completions",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "modelscope",
+      "name": "ModelScope 魔搭社区",
+      "category": "cn",
+      "home": "https://www.modelscope.cn/",
+      "key_signup": "https://www.modelscope.cn/my/myaccesstoken",
+      "key_env": "MODELSCOPE_TOKEN",
+      "anonymous": false,
+      "free_tier": "每日免费推理调用次数（刷新制），开源模型数量多，国内访问友好",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://api-inference.modelscope.cn/v1/chat/completions",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "zhipu-bigmodel",
+      "name": "智谱 BigModel 开放平台",
+      "category": "cn",
+      "home": "https://open.bigmodel.cn/",
+      "key_signup": "https://open.bigmodel.cn/usercenter/apikeys",
+      "key_env": "ZHIPU_API_KEY",
+      "anonymous": false,
+      "free_tier": "glm-4-flash 等轻量模型长期免费调用",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+        "model": "glm-4-flash",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "dashscope-bailian",
+      "name": "阿里云百炼 DashScope",
+      "category": "cn",
+      "home": "https://www.aliyun.com/product/bailian",
+      "key_signup": "https://bailian.console.aliyun.com/?apiKey=1",
+      "key_env": "DASHSCOPE_API_KEY",
+      "anonymous": false,
+      "free_tier": "新用户各主流模型均有限时免费额度，部分通义小模型有常驻免费档",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+        "model": "qwen-turbo",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "qianfan",
+      "name": "百度千帆 ModelBuilder",
+      "category": "cn",
+      "home": "https://qianfan.cloud.baidu.com/",
+      "key_signup": "https://console.bce.baidu.com/iam/#/iam/apikey/list",
+      "key_env": "QIANFAN_API_KEY",
+      "anonymous": false,
+      "free_tier": "部分文心及开源模型提供限时免费试用额度（随活动变化，以控制台为准）",
+      "probe": {
+        "kind": "openai_chat",
+        "base_url": "https://qianfan.baidubce.com/v2/chat/completions",
+        "model": "ernie-speed-128k",
+        "max_tokens": 8
+      }
+    },
+    {
+      "id": "workers-ai",
+      "name": "Cloudflare Workers AI",
+      "category": "intl",
+      "home": "https://developers.cloudflare.com/workers-ai/",
+      "key_signup": "https://dash.cloudflare.com/profile/api-tokens",
+      "key_env": "CF_WORKERS_AI_TOKEN",
+      "anonymous": false,
+      "free_tier": "每日免费 neuron 分配，可在 Workers 内或 REST 调用多模态开源模型",
+      "probe": null
+    }
+  ]
+}
