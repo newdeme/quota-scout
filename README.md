@@ -32,7 +32,7 @@
 |---|---|---|---|---|---|---|---|
 | [SiliconFlow 硅基流动](https://siliconflow.cn/) | `直连✓` | 注册赠送体验金，另有多个常驻免费小模型（Qwen/GLM 小尺寸等）† | ❌ 不可用 | — | — | `SILICONFLOW_API_KEY` | [注册](https://cloud.siliconflow.cn/account/ak) |
 | [ModelScope 魔搭社区](https://www.modelscope.cn/) | `直连✓` | 每日免费推理调用次数（刷新制），开源模型数量多，国内访问友好 | ❌ 不可用 | — | — | `MODELSCOPE_TOKEN` | [注册](https://www.modelscope.cn/my/myaccesstoken) |
-| [智谱 BigModel 开放平台](https://bigmodel.cn/) | `直连✓` | glm-4-flash 等轻量模型长期免费调用 | ❌ 不可用 | — | — | `ZHIPU_API_KEY` | [注册](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
+| [智谱 BigModel 开放平台](https://bigmodel.cn/) | `直连✓` | glm-4-flash 等轻量模型长期免费调用；经标准端点 /api/paas/v4 按量/免费计费，与 GLM Coding/Token 订阅套餐相互隔离（套餐仅限专属端点+指定工具）。另建普通 Key 用于本工具，勿复用订阅 Key | ❌ 不可用 | — | — | `ZHIPU_API_KEY` | [注册](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
 | [阿里云百炼 DashScope](https://www.aliyun.com/product/bailian) | `直连✓` | 新用户各主流模型均有限时免费额度，部分通义小模型有常驻免费档† | ❌ 不可用 | — | — | `DASHSCOPE_API_KEY` | [注册](https://bailian.console.aliyun.com/?apiKey=1) |
 | [百度千帆 ModelBuilder](https://qianfan.cloud.baidu.com/) | `直连✓` | 部分文心及开源模型提供限时免费试用额度（随活动变化，以控制台为准）† | ❌ 不可用 | — | — | `QIANFAN_API_KEY` | [注册](https://console.bce.baidu.com/iam/#/iam/apikey/list) |
 

@@ -189,7 +189,7 @@
       "key_signup": "https://bigmodel.cn/usercenter/proj-mgmt/apikeys",
       "key_env": "ZHIPU_API_KEY",
       "anonymous": false,
-      "free_tier": "glm-4-flash 等轻量模型长期免费调用",
+      "free_tier": "glm-4-flash 等轻量模型长期免费调用；经标准端点 /api/paas/v4 按量/免费计费，与 GLM Coding/Token 订阅套餐相互隔离（套餐仅限专属端点+指定工具）。另建普通 Key 用于本工具，勿复用订阅 Key",
       "probe": {
         "kind": "openai_chat",
         "base_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
