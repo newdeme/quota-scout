@@ -44,7 +44,9 @@ def load_env_file(path: Path) -> dict:
 def probe_openai_chat(ch: dict, keys: dict, timeout_s: int) -> dict:
     p = ch["probe"]
     key = keys.get(ch.get("key_env") or "", "")
-    headers = {"Content-Type": "application/json"}
+    # 部分 API（如 Groq）在 Cloudflare 后按客户端签名封禁默认 Python-UA → error 1010
+    headers = {"Content-Type": "application/json",
+               "User-Agent": "quota-scout/0.2 (+github.com/newdeme/quota-scout)"}
     has_key = bool(key)
     if has_key:
         headers["Authorization"] = f"Bearer {key}"
@@ -60,12 +62,21 @@ def probe_openai_chat(ch: dict, keys: dict, timeout_s: int) -> dict:
     req = urllib.request.Request(p["base_url"], data=body, headers=headers)
     t0 = time.monotonic()
     try:
-        with urllib.request.urlopen(req, timeout=timeout_s) as resp:
-            resp.read()
-            latency = int((time.monotonic() - t0) * 1000)
-            state = "ok" if has_key else "anon_ok"
-            return {"state": state, "latency_ms": latency,
-                    "detail": f"HTTP {resp.status}"}
+        for attempt in range(2):  # 网络抖动重试一次；HTTPError 直接抛给外层分类
+            try:
+                with urllib.request.urlopen(req, timeout=timeout_s) as resp:
+                    resp.read()
+                    latency = int((time.monotonic() - t0) * 1000)
+                    state = "ok" if has_key else "anon_ok"
+                    return {"state": state, "latency_ms": latency,
+                            "detail": f"HTTP {resp.status}"}
+            except urllib.error.HTTPError:
+                raise
+            except Exception:
+                if attempt == 0:
+                    time.sleep(2)
+                else:
+                    raise
     except urllib.error.HTTPError as e:
         latency = int((time.monotonic() - t0) * 1000)
         detail = f"HTTP {e.code}"
@@ -104,6 +115,7 @@ def main():
     args = ap.parse_args()
 
     conf = json.loads((DATA / "channels.json").read_text())
+    order = [c["id"] for c in conf["channels"]]
     channels = conf["channels"]
     if args.only:
         want = set(args.only.split(","))
@@ -125,7 +137,16 @@ def main():
         results.append(entry)
         print(f"{ICON.get(r['state'], '·')} [{r['state']:>12}] {ch['name']:<28} {r.get('detail','')}")
 
-    # 排序输出稳定化：按渠道原顺序即可；历史追加
+    # 合并写入：--only 部分探测不得覆盖其余渠道的既有状态
+    try:
+        prev = {r["id"]: r for r in json.loads(
+            (DATA / "results.json").read_text())["results"]}
+    except Exception:
+        prev = {}
+    if args.only:
+        have = {e["id"] for e in results}
+        results = results + [prev[k] for k in prev if k not in have]
+        results.sort(key=lambda e: order.index(e["id"]))
     (DATA / "results.json").write_text(
         json.dumps({"generated_at": now, "results": results},
                    ensure_ascii=False, indent=2) + "\n")

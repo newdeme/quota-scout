@@ -31,7 +31,7 @@
       "probe": {
         "kind": "openai_chat",
         "base_url": "https://openrouter.ai/api/v1/chat/completions",
-        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "model": "z-ai/glm-5.2:free",
         "max_tokens": 8
       },
       "cn_access": "intl",
@@ -45,11 +45,11 @@
       "key_signup": "https://console.groq.com/keys",
       "key_env": "GROQ_API_KEY",
       "anonymous": false,
-      "free_tier": "开发者免费层，速率受限但长期可用，推理速度极快",
+      "free_tier": "开发者免费层，速率受限但长期可用；2026-08 目录以 gpt-oss/qwen/compound 系为主（llama 已下架）",
       "probe": {
         "kind": "openai_chat",
         "base_url": "https://api.groq.com/openai/v1/chat/completions",
-        "model": "llama-3.3-70b-versatile",
+        "model": "openai/gpt-oss-120b",
         "max_tokens": 8
       },
       "cn_access": "intl",
