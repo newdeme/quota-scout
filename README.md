@@ -84,10 +84,15 @@ data/history.jsonl   每次探测的滚动历史（可用于画趋势）
 本地运行：
 
 ```bash
-cp .env.example .env   # 填入你手里的 key（.env 已 gitignore）
+# 仅当 .env 不存在时才创建模板（防误覆盖已有 Key！）
+[ -f .env ] || cp .env.example .env
+
+nano .env                              # 增改 Key 都编辑这个既有文件
 python3 scripts/probe.py                # 全量
 python3 scripts/probe.py --only groq    # 单测一个渠道
 ```
+
+> ⚠️ `.env` 被 gitignore 不入仓库，Secrets 是只写的：本地 Key 一旦丢失只能回原平台重新获取。日常“测一测”直接跑 probe 即可，**永远不需要重建 `.env`**。
 
 ### 贡献新渠道
 
