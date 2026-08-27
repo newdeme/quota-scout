@@ -53,7 +53,8 @@ def row(ch: dict, lang: str) -> str:
     labels = STATE_CN if lang == "zh" else STATE_EN
     dagger = "†" if ch.get("bonus_once") else ""
     tier = ch[TIER_KEY[lang]] + dagger
-    return (f"| [{ch['name']}]({ch['home']}) | {NET[lang][ch['cn_access']]} | {tier} "
+    name = ch.get('name_en', ch['name']) if lang == 'en' else ch['name']
+    return (f"| [{name}]({ch['home']}) | {NET[lang][ch['cn_access']]} | {tier} "
             f"| {ICON[state]} {labels[state]} "
             f"| {str(lat)+' ms' if lat else '—'} "
             f"| {r.get('ts', '—') if probed else '—'} "
@@ -67,13 +68,21 @@ def build_table(lang: str) -> str:
         for title, gkey in SECTIONS[lang] if groups[gkey])
 
 
+import re
+def cjk_guard(text, allow):
+    bad = {m for m in re.findall(r'[\u4e00-\u9fff]+', text)} - allow
+    assert not bad, f"EN README CJK leak: {bad}"
+
 for path, lang in ((ROOT / "README.md", "en"),
                    (ROOT / "README.zh-CN.md", "zh")):
     text = path.read_text()
     assert START in text and END in text, f"{path.name} 缺少 RADAR 标记区间"
     head, _, rest = text.partition(START)
     _, _, tail = rest.partition(END)
-    path.write_text(head + START + "\n" + build_table(lang) + "\n" + END + tail)
+    out = head + START + "\n" + build_table(lang) + "\n" + END + tail
+    if lang == "en":
+        cjk_guard(out, {"简体中文"})
+    path.write_text(out)
 
 # ---------- 动态徽章 ----------
 ok_n = sum(1 for e in results.values() if e["state"] in ("ok", "anon_ok"))

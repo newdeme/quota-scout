@@ -37,7 +37,8 @@
       },
       "cn_access": "intl",
       "bonus_once": false,
-      "free_tier_en": "Models suffixed :free are callable at no cost (daily caps); a normal API key is required — anonymous access returned 401 as of 2026-08"
+      "free_tier_en": "Models suffixed :free are callable at no cost (daily caps); a normal API key is required — anonymous access returned 401 as of 2026-08",
+      "name_en": "OpenRouter (:free models)"
     },
     {
       "id": "groq",
@@ -170,7 +171,8 @@
       },
       "cn_access": "direct",
       "bonus_once": true,
-      "free_tier_en": "Sign-up bonus credits plus always-free small models (small Qwen/GLM sizes)"
+      "free_tier_en": "Sign-up bonus credits plus always-free small models (small Qwen/GLM sizes)",
+      "name_en": "SiliconFlow"
     },
     {
       "id": "modelscope",
@@ -189,7 +191,8 @@
       },
       "cn_access": "direct",
       "bonus_once": false,
-      "free_tier_en": "Daily-refreshed free inference calls; huge open-model catalog, mainland-friendly"
+      "free_tier_en": "Daily-refreshed free inference calls; huge open-model catalog, mainland-friendly",
+      "name_en": "ModelScope"
     },
     {
       "id": "zhipu-bigmodel",
@@ -208,7 +211,8 @@
       },
       "cn_access": "direct",
       "bonus_once": false,
-      "free_tier_en": "Lightweight glm models (e.g. glm-4-flash) free for the long run via the standard /api/paas/v4 endpoint — billed separately from GLM Coding/Token plans; use a normal API key here, never your plan key"
+      "free_tier_en": "Lightweight glm models (e.g. glm-4-flash) free for the long run via the standard /api/paas/v4 endpoint — billed separately from GLM Coding/Token plans; use a normal API key here, never your plan key",
+      "name_en": "Zhipu AI Open Platform (BigModel)"
     },
     {
       "id": "dashscope-bailian",
@@ -227,7 +231,8 @@
       },
       "cn_access": "direct",
       "bonus_once": true,
-      "free_tier_en": "Time-limited free quota per model for new users†; some small Qwen tiers stay free long-run"
+      "free_tier_en": "Time-limited free quota per model for new users†; some small Qwen tiers stay free long-run",
+      "name_en": "Alibaba Cloud Bailian (DashScope)"
     },
     {
       "id": "qianfan",
@@ -246,7 +251,8 @@
       },
       "cn_access": "direct",
       "bonus_once": true,
-      "free_tier_en": "Activity-based free trials on selected ERNIE/open models (varies — see console)"
+      "free_tier_en": "Activity-based free trials on selected ERNIE/open models (varies — see console)",
+      "name_en": "Baidu Qianfan ModelBuilder"
     },
     {
       "id": "workers-ai",
