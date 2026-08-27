@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""把 data/results.json 渲染进 README.md 标记区间，并生成 docs/radar.svg 与徽章 JSON。零依赖。"""
+"""把 data/results.json 渲染进双语 README（EN 默认 + zh-CN 配套），生成 assets/radar.svg 与徽章 JSON。零依赖。"""
 import json
 import math
 from pathlib import Path
@@ -10,50 +10,70 @@ START, END = "<!-- RADAR:START -->", "<!-- RADAR:END -->"
 ICON = {"ok": "✅", "anon_ok": "🟢", "rate_limited": "🟡", "no_key": "⚪",
         "auth_invalid": "🔑", "bad_model": "🏷️", "quota_out": "💸",
         "down": "❌", "retired": "🪦", "no_probe": "📖"}
+
 STATE_CN = {"ok": "验证可用", "anon_ok": "匿名可用", "rate_limited": "限流(服务正常)",
             "no_key": "待密钥", "auth_invalid": "密钥无效", "bad_model": "模型待更新",
             "quota_out": "额度耗尽", "down": "不可用", "retired": "官方退役",
             "no_probe": "收录未探测"}
+STATE_EN = {"ok": "verified", "anon_ok": "anon OK", "rate_limited": "rate-limited (alive)",
+            "no_key": "awaiting key", "auth_invalid": "key rejected", "bad_model": "stale model",
+            "quota_out": "quota spent", "down": "down", "retired": "RETIRED",
+            "no_probe": "doc-only"}
 
-readme = ROOT / "README.md"
+HEAD_CN = ("| 渠道 | 网络 | 免费方式（快照，以官方为准） | 状态 | 延迟 "
+           "| 最后探测 (UTC) | 密钥变量 | 注册 |\n"
+           "|---|---|---|---|---|---|---|---|")
+HEAD_EN = ("| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency "
+           "| Last probe (UTC) | Key var | Sign up |\n"
+           "|---|---|---|---|---|---|---|---|")
+
+SECTIONS = {
+    "zh": [("### 🇨🇳 国内额度 · 大陆直连优先", "cn"),
+           ("### 🌍 国际额度 · 多数需国际网络", "intl")],
+    "en": [("### 🇨🇳 China-direct · works from mainland networks", "cn"),
+           ("### 🌍 Global · usually needs international networking", "intl")],
+}
+NET = {"zh": {"direct": "`直连✓`", "intl": "`需国际网络`"},
+       "en": {"direct": "`direct ✓`", "intl": "`intl net`"}}
+TIER_KEY = {"zh": "free_tier", "en": "free_tier_en"}
+SIGNUP = {"zh": "注册", "en": "Sign up"}
+
 conf = json.loads((ROOT / "data" / "channels.json").read_text())
 results = {r["id"]: r for r in json.loads(
     (ROOT / "data" / "results.json").read_text())["results"]}
+groups = {"cn": [c for c in conf["channels"] if c["cn_access"] == "direct"],
+          "intl": [c for c in conf["channels"] if c["cn_access"] == "intl"]}
 
 
-def row(ch: dict) -> str:
+def row(ch: dict, lang: str) -> str:
     r = results.get(ch["id"], {})
     state = r.get("state", "down")
     lat = r.get("latency_ms")
     probed = state not in ("no_key", "no_probe")
-    net = "直连✓" if ch["cn_access"] == "direct" else "需国际网络"
+    labels = STATE_CN if lang == "zh" else STATE_EN
     dagger = "†" if ch.get("bonus_once") else ""
-    name = f"[{ch['name']}]({ch['home']})"
-    return (f"| {name} | `{net}` | {ch['free_tier']}{dagger} "
-            f"| {ICON[state]} {STATE_CN[state]} "
+    tier = ch[TIER_KEY[lang]] + dagger
+    return (f"| [{ch['name']}]({ch['home']}) | {NET[lang][ch['cn_access']]} | {tier} "
+            f"| {ICON[state]} {labels[state]} "
             f"| {str(lat)+' ms' if lat else '—'} "
             f"| {r.get('ts', '—') if probed else '—'} "
-            f"| `{ch.get('key_env') or '—'}` | [注册]({ch['key_signup']}) |")
+            f"| `{ch.get('key_env') or '—'}` | [{SIGNUP[lang]}]({ch['key_signup']}) |")
 
 
-HEAD = ("| 渠道 | 网络 | 免费方式（快照，以官方为准） | 状态 | 延迟 "
-        "| 最后探测 (UTC) | 密钥变量 | 注册 |\n"
-        "|---|---|---|---|---|---|---|---|")
-groups = {"cn": [c for c in conf["channels"] if c["cn_access"] == "direct"],
-          "intl": [c for c in conf["channels"] if c["cn_access"] == "intl"]}
-sections = [
-    ("### 🇨🇳 国内额度 · 大陆直连优先", groups["cn"]),
-    ("### 🌍 国际额度 · 多数需国际网络", groups["intl"]),
-]
-table_md = "\n\n".join(
-    title + "\n\n" + HEAD + "\n" + "\n".join(row(c) for c in chans)
-    for title, chans in sections if chans)
+def build_table(lang: str) -> str:
+    head = HEAD_CN if lang == "zh" else HEAD_EN
+    return "\n\n".join(
+        title + "\n\n" + head + "\n" + "\n".join(row(c, lang) for c in groups[gkey])
+        for title, gkey in SECTIONS[lang] if groups[gkey])
 
-text = readme.read_text()
-assert START in text and END in text, "README 缺少 RADAR 标记区间"
-head, _, rest = text.partition(START)
-_, _, tail = rest.partition(END)
-readme.write_text(head + START + "\n" + table_md + "\n" + END + tail)
+
+for path, lang in ((ROOT / "README.md", "en"),
+                   (ROOT / "README.zh-CN.md", "zh")):
+    text = path.read_text()
+    assert START in text and END in text, f"{path.name} 缺少 RADAR 标记区间"
+    head, _, rest = text.partition(START)
+    _, _, tail = rest.partition(END)
+    path.write_text(head + START + "\n" + build_table(lang) + "\n" + END + tail)
 
 # ---------- 动态徽章 ----------
 ok_n = sum(1 for e in results.values() if e["state"] in ("ok", "anon_ok"))
@@ -134,5 +154,5 @@ assets = ROOT / "assets"
 assets.mkdir(exist_ok=True)
 (assets / "radar.svg").write_text("\n".join(svg) + "\n")
 
-print(f"README 已更新：国内 {len(groups['cn'])} + 国际 {len(groups['intl'])} 渠道；"
-      f"radar.svg / badge-*.json 已生成")
+print(f"README.md(EN) + README.zh-CN.md 已更新；radar.svg / badge-*.json 已生成"
+      f"（可用 {usable}/{total}）")

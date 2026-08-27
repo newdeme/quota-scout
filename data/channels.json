@@ -17,7 +17,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Permanent free tier with per-model daily/RPM limits — solid for personal use & prototyping"
     },
     {
       "id": "openrouter",
@@ -35,7 +36,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Models suffixed :free are callable at no cost (daily caps); a normal API key is required — anonymous access returned 401 as of 2026-08"
     },
     {
       "id": "groq",
@@ -53,7 +55,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Long-lived developer free tier, rate-limited; 2026-08 catalog led by gpt-oss/qwen (llama retired from the free list)"
     },
     {
       "id": "cerebras",
@@ -71,7 +74,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Free tier with a generous daily token allowance; famously fast inference"
     },
     {
       "id": "mistral",
@@ -89,7 +93,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Free plan on by default (no credit card), rate-limited; create keys in the Studio console"
     },
     {
       "id": "nvidia-nim",
@@ -107,7 +112,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Developer-program credit for a large amount of inference; broad open-model family"
     },
     {
       "id": "github-models",
@@ -125,7 +131,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Call several mainstream models with any GitHub PAT. RETIRING — HTTP 410 brownout observed 2026-08-27; do not build on it"
     },
     {
       "id": "huggingface-router",
@@ -143,7 +150,8 @@
         "max_tokens": 8
       },
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Small monthly inference credits ship with every account; overflow goes pay-as-you-go"
     },
     {
       "id": "siliconflow",
@@ -161,7 +169,8 @@
         "max_tokens": 8
       },
       "cn_access": "direct",
-      "bonus_once": true
+      "bonus_once": true,
+      "free_tier_en": "Sign-up bonus credits plus always-free small models (small Qwen/GLM sizes)"
     },
     {
       "id": "modelscope",
@@ -179,7 +188,8 @@
         "max_tokens": 8
       },
       "cn_access": "direct",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Daily-refreshed free inference calls; huge open-model catalog, mainland-friendly"
     },
     {
       "id": "zhipu-bigmodel",
@@ -197,7 +207,8 @@
         "max_tokens": 8
       },
       "cn_access": "direct",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Lightweight glm models (e.g. glm-4-flash) free for the long run via the standard /api/paas/v4 endpoint — billed separately from GLM Coding/Token plans; use a normal API key here, never your plan key"
     },
     {
       "id": "dashscope-bailian",
@@ -215,7 +226,8 @@
         "max_tokens": 8
       },
       "cn_access": "direct",
-      "bonus_once": true
+      "bonus_once": true,
+      "free_tier_en": "Time-limited free quota per model for new users†; some small Qwen tiers stay free long-run"
     },
     {
       "id": "qianfan",
@@ -233,7 +245,8 @@
         "max_tokens": 8
       },
       "cn_access": "direct",
-      "bonus_once": true
+      "bonus_once": true,
+      "free_tier_en": "Activity-based free trials on selected ERNIE/open models (varies — see console)"
     },
     {
       "id": "workers-ai",
@@ -246,7 +259,8 @@
       "free_tier": "每日免费 neuron 分配，可在 Workers 内或 REST 调用多模态开源模型",
       "probe": null,
       "cn_access": "intl",
-      "bonus_once": false
+      "bonus_once": false,
+      "free_tier_en": "Daily free neuron allocation; open multimodal models callable via Workers or REST"
     }
   ]
 }

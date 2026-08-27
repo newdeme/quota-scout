@@ -2,9 +2,11 @@
 
 # ⌁ QUOTA·SCOUT
 
-**额度侦察兵** · Free-Quota Radar for Official LLM Tiers
+**Free-Quota Radar for Official LLM Tiers**
 
-*一枚替你巡逻免费星域的小雷达：CI 每 6 小时对官方免费额度实弹探活，谁还活着，一眼可查。*
+*A tiny scout patrolling the free tier of the model galaxy: GitHub Actions live-probes official free quotas every 6 hours, so you always know who is still alive.*
+
+**English** · [简体中文](README.zh-CN.md)
 
 <!-- 徽章在仓库转公开后自动亮起（shields 需匿名读取 raw JSON）；无需改代码
 <p>
@@ -16,100 +18,92 @@
 </p>
 -->
 
-<img src="assets/radar.svg" width="340" alt="quota-scout 探活雷达图：每个光点是一个免费渠道，距离圆心越近延迟越低，菱形框=国内直连，圆形=国际">
+<img src="assets/radar.svg" width="340" alt="quota-scout live radar: one blip per channel, closer to center = lower latency, diamond ring = mainland-direct, circle = global">
 
 </div>
 
-🇨🇳 **国内用户看第一节即可零门槛开嫖；🌍 国际节能力更强但依赖网络环境。**
+🇨🇳 **Mainland users: start with the first table, zero extra networking needed. 🌍 The global table is more powerful but network-dependent.**
 
 > [!NOTE]
-> CI 自 GitHub Actions（海外节点）发起探测：结果只证明「服务存活且密钥有效」，**不等于大陆直连可达**。表中 `直连✓` 为人工标注快照。CN 侧双端探活已在 Roadmap。
+> Probes run from GitHub Actions (overseas runners): a result only proves “service alive + key valid”, **not** “reachable from mainland China”. The `direct ✓` tag is a hand-maintained snapshot; live CN-side probing is on the roadmap.
 
 <!-- RADAR:START -->
-### 🇨🇳 国内额度 · 大陆直连优先
+### 🇨🇳 China-direct · works from mainland networks
 
-| 渠道 | 网络 | 免费方式（快照，以官方为准） | 状态 | 延迟 | 最后探测 (UTC) | 密钥变量 | 注册 |
+| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency | Last probe (UTC) | Key var | Sign up |
 |---|---|---|---|---|---|---|---|
-| [SiliconFlow 硅基流动](https://siliconflow.cn/) | `直连✓` | 注册赠送体验金，另有多个常驻免费小模型（Qwen/GLM 小尺寸等）† | ⚪ 待密钥 | — | — | `SILICONFLOW_API_KEY` | [注册](https://cloud.siliconflow.cn/account/ak) |
-| [ModelScope 魔搭社区](https://www.modelscope.cn/) | `直连✓` | 每日免费推理调用次数（刷新制），开源模型数量多，国内访问友好 | ⚪ 待密钥 | — | — | `MODELSCOPE_TOKEN` | [注册](https://www.modelscope.cn/my/myaccesstoken) |
-| [智谱 BigModel 开放平台](https://bigmodel.cn/) | `直连✓` | glm-4-flash 等轻量模型长期免费调用；经标准端点 /api/paas/v4 按量/免费计费，与 GLM Coding/Token 订阅套餐相互隔离（套餐仅限专属端点+指定工具）。另建普通 Key 用于本工具，勿复用订阅 Key | ✅ 验证可用 | 2645 ms | 2026-08-27T09:17:15Z | `ZHIPU_API_KEY` | [注册](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
-| [阿里云百炼 DashScope](https://www.aliyun.com/product/bailian) | `直连✓` | 新用户各主流模型均有限时免费额度，部分通义小模型有常驻免费档† | ⚪ 待密钥 | — | — | `DASHSCOPE_API_KEY` | [注册](https://bailian.console.aliyun.com/?apiKey=1) |
-| [百度千帆 ModelBuilder](https://qianfan.cloud.baidu.com/) | `直连✓` | 部分文心及开源模型提供限时免费试用额度（随活动变化，以控制台为准）† | ⚪ 待密钥 | — | — | `QIANFAN_API_KEY` | [注册](https://console.bce.baidu.com/iam/#/iam/apikey/list) |
+| [SiliconFlow 硅基流动](https://siliconflow.cn/) | `direct ✓` | Sign-up bonus credits plus always-free small models (small Qwen/GLM sizes)† | ⚪ awaiting key | — | — | `SILICONFLOW_API_KEY` | [Sign up](https://cloud.siliconflow.cn/account/ak) |
+| [ModelScope 魔搭社区](https://www.modelscope.cn/) | `direct ✓` | Daily-refreshed free inference calls; huge open-model catalog, mainland-friendly | ⚪ awaiting key | — | — | `MODELSCOPE_TOKEN` | [Sign up](https://www.modelscope.cn/my/myaccesstoken) |
+| [智谱 BigModel 开放平台](https://bigmodel.cn/) | `direct ✓` | Lightweight glm models (e.g. glm-4-flash) free for the long run via the standard /api/paas/v4 endpoint — billed separately from GLM Coding/Token plans; use a normal API key here, never your plan key | ✅ verified | 2645 ms | 2026-08-27T09:17:15Z | `ZHIPU_API_KEY` | [Sign up](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
+| [阿里云百炼 DashScope](https://www.aliyun.com/product/bailian) | `direct ✓` | Time-limited free quota per model for new users†; some small Qwen tiers stay free long-run† | ⚪ awaiting key | — | — | `DASHSCOPE_API_KEY` | [Sign up](https://bailian.console.aliyun.com/?apiKey=1) |
+| [百度千帆 ModelBuilder](https://qianfan.cloud.baidu.com/) | `direct ✓` | Activity-based free trials on selected ERNIE/open models (varies — see console)† | ⚪ awaiting key | — | — | `QIANFAN_API_KEY` | [Sign up](https://console.bce.baidu.com/iam/#/iam/apikey/list) |
 
-### 🌍 国际额度 · 多数需国际网络
+### 🌍 Global · usually needs international networking
 
-| 渠道 | 网络 | 免费方式（快照，以官方为准） | 状态 | 延迟 | 最后探测 (UTC) | 密钥变量 | 注册 |
+| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency | Last probe (UTC) | Key var | Sign up |
 |---|---|---|---|---|---|---|---|
-| [Google AI Studio (Gemini API)](https://aistudio.google.com/) | `需国际网络` | 有永久免费层，按模型设每日/每分钟限额，适合个人体验与小规模开发 | ✅ 验证可用 | 476 ms | 2026-08-27T09:17:15Z | `GEMINI_API_KEY` | [注册](https://aistudio.google.com/apikey) |
-| [OpenRouter (:free 模型)](https://openrouter.ai/) | `需国际网络` | 带 :free 后缀的模型可免费调用（每日限额）；需注册并配置 API Key，2026-08 实测匿名调用已返回 401 | 🟡 限流(服务正常) | 369 ms | 2026-08-27T09:17:15Z | `OPENROUTER_API_KEY` | [注册](https://openrouter.ai/settings/keys) |
-| [Groq Cloud](https://groq.com/) | `需国际网络` | 开发者免费层，速率受限但长期可用；2026-08 目录以 gpt-oss/qwen/compound 系为主（llama 已下架） | ✅ 验证可用 | 355 ms | 2026-08-27T09:17:15Z | `GROQ_API_KEY` | [注册](https://console.groq.com/keys) |
-| [Cerebras Inference](https://cloud.cerebras.ai/) | `需国际网络` | 免费层提供每日较大 token 配额，主打超高速推理 | ⚪ 待密钥 | — | — | `CEREBRAS_API_KEY` | [注册](https://cloud.cerebras.ai/) |
-| [Mistral La Plateforme](https://mistral.ai/) | `需国际网络` | 免费模式默认开启（无需信用卡），有限速；在 Studio 控制台创建 API Key | ⚪ 待密钥 | — | — | `MISTRAL_API_KEY` | [注册](https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key) |
-| [NVIDIA NIM (build.nvidia.com)](https://build.nvidia.com/) | `需国际网络` | 开发者计划赠送大量推理调用额度，开源模型家族齐全 | ⚪ 待密钥 | — | — | `NVIDIA_API_KEY` | [注册](https://build.nvidia.com/explore/discover) |
-| [GitHub Models](https://github.com/marketplace/models) | `需国际网络` | 任意 GitHub 账号可用 PAT 调用多家主流模型。【2026-08-27 实测：平台进入退役 brownout（HTTP 410），即将下线，新用户勿再依赖】 | ⚪ 待密钥 | — | — | `GITHUB_MODELS_TOKEN` | [注册](https://github.com/settings/tokens) |
-| [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers) | `需国际网络` | 所有注册用户每月附带少量免费推理 credit（约一周量级的轻度使用），超出后走付费 | ⚪ 待密钥 | — | — | `HF_TOKEN` | [注册](https://huggingface.co/settings/tokens) |
-| [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) | `需国际网络` | 每日免费 neuron 分配，可在 Workers 内或 REST 调用多模态开源模型 | 📖 收录未探测 | — | — | `CF_WORKERS_AI_TOKEN` | [注册](https://dash.cloudflare.com/profile/api-tokens) |
+| [Google AI Studio (Gemini API)](https://aistudio.google.com/) | `intl net` | Permanent free tier with per-model daily/RPM limits — solid for personal use & prototyping | ✅ verified | 476 ms | 2026-08-27T09:17:15Z | `GEMINI_API_KEY` | [Sign up](https://aistudio.google.com/apikey) |
+| [OpenRouter (:free 模型)](https://openrouter.ai/) | `intl net` | Models suffixed :free are callable at no cost (daily caps); a normal API key is required — anonymous access returned 401 as of 2026-08 | 🟡 rate-limited (alive) | 369 ms | 2026-08-27T09:17:15Z | `OPENROUTER_API_KEY` | [Sign up](https://openrouter.ai/settings/keys) |
+| [Groq Cloud](https://groq.com/) | `intl net` | Long-lived developer free tier, rate-limited; 2026-08 catalog led by gpt-oss/qwen (llama retired from the free list) | ✅ verified | 355 ms | 2026-08-27T09:17:15Z | `GROQ_API_KEY` | [Sign up](https://console.groq.com/keys) |
+| [Cerebras Inference](https://cloud.cerebras.ai/) | `intl net` | Free tier with a generous daily token allowance; famously fast inference | ⚪ awaiting key | — | — | `CEREBRAS_API_KEY` | [Sign up](https://cloud.cerebras.ai/) |
+| [Mistral La Plateforme](https://mistral.ai/) | `intl net` | Free plan on by default (no credit card), rate-limited; create keys in the Studio console | ⚪ awaiting key | — | — | `MISTRAL_API_KEY` | [Sign up](https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key) |
+| [NVIDIA NIM (build.nvidia.com)](https://build.nvidia.com/) | `intl net` | Developer-program credit for a large amount of inference; broad open-model family | ⚪ awaiting key | — | — | `NVIDIA_API_KEY` | [Sign up](https://build.nvidia.com/explore/discover) |
+| [GitHub Models](https://github.com/marketplace/models) | `intl net` | Call several mainstream models with any GitHub PAT. RETIRING — HTTP 410 brownout observed 2026-08-27; do not build on it | ⚪ awaiting key | — | — | `GITHUB_MODELS_TOKEN` | [Sign up](https://github.com/settings/tokens) |
+| [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers) | `intl net` | Small monthly inference credits ship with every account; overflow goes pay-as-you-go | ⚪ awaiting key | — | — | `HF_TOKEN` | [Sign up](https://huggingface.co/settings/tokens) |
+| [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) | `intl net` | Daily free neuron allocation; open multimodal models callable via Workers or REST | 📖 doc-only | — | — | `CF_WORKERS_AI_TOKEN` | [Sign up](https://dash.cloudflare.com/profile/api-tokens) |
 <!-- RADAR:END -->
 
-`†` = 以注册一次性赠送为主的渠道，用完即止，时效性最强。
+`†` = sign-up bonus driven (one-shot); expires fastest.
 
 <details>
-<summary><b>📖 状态图例 · 工作原理 · 贡献指南 · Roadmap</b></summary>
+<summary><b>📖 Legend · How it works · Contribute</b></summary>
 
-### 图例
+### Legend
 
-| 图标 | 含义 | 图标 | 含义 |
+| Icon | Meaning | Icon | Meaning |
 |---|---|---|---|
-| ✅ | 实弹验证可用（配密钥调用成功） | 🔑 | 密钥被拒（401/403） |
-| 🟢 | 匿名调用成功 | 🏷️ | 模型 ID 失效，待更新 |
-| 🟡 | 429 限流 —— 服务正常 | 💸 | 额度耗尽 |
-| ⚪ | 未配置密钥，跳过探测 | ❌ | 不可用（网络失败 / 5xx） |
+| ✅ | Live-fire verified (key configured, call succeeded) | 🔑 | Key rejected (401/403) |
+| 🟢 | Anonymous call succeeded | 🏷️ | Stale model ID, needs update |
+| 🟡 | 429 rate-limited — service itself healthy | 💸 | Quota spent |
+| ⚪ | No key configured, skipped | ❌ | Down (network / 5xx) |
 
-雷达图中：**菱形框 = 国内直连渠道，圆形 = 国际渠道**；离圆心越近延迟越低，空心点表示未实测。
+On the radar: **diamond ring = mainland-direct channels, circle = global channels**; closer to center = lower latency; hollow blips are untested.
 
-### 合规边界
+### Compliance boundary
 
-只收录厂商**官方公开**的免费层 / 试用额度 / 赠送金。不收录任何逆向 Web 转 API 的灰色渠道。
+Only tiers officially published by vendors (free plans / trials / sign-up credits). Reverse-engineered web-to-API channels are never listed.
 
-### 工作原理
+### How it works
 
 ```
-data/channels.json   渠道登记表（分组、端点、模型 ID 快照、密钥变量名）
-scripts/probe.py     探活：向每个渠道发一条 max_tokens=8 的 "ping"，零第三方依赖
-scripts/render.py    国内前置双表渲染 + SVG 雷达图 + shields 动态徽章数据
-.github/workflows/   cron 每 6 小时跑 probe → render → 自动 commit
-data/history.jsonl   每次探测的滚动历史（可用于画趋势）
+data/channels.json    Channel registry (SSOT): grouping, endpoints, model-ID snapshots, key var names
+scripts/probe.py      Probe: an 8-token "ping" per channel — zero third-party dependencies
+scripts/render.py     Bilingual status tables + SVG radar + shields badge data
+.github/workflows/    cron every 6h: probe → render → auto-commit
+data/history.jsonl    Rolling probe history (ready for trend charts)
 ```
 
-本地运行：
+Local run:
 
 ```bash
-# 仅当 .env 不存在时才创建模板（防误覆盖已有 Key！）
+# Create the template ONLY if .env doesn't exist (never overwrite your keys!)
 [ -f .env ] || cp .env.example .env
 
-nano .env                              # 增改 Key 都编辑这个既有文件
-python3 scripts/probe.py                # 全量
-python3 scripts/probe.py --only groq    # 单测一个渠道
+nano .env                              # edit the existing file
+python3 scripts/probe.py                # full sweep
+python3 scripts/probe.py --only groq    # single channel
 ```
 
-> ⚠️ `.env` 被 gitignore 不入仓库，Secrets 是只写的：本地 Key 一旦丢失只能回原平台重新获取。日常“测一测”直接跑 probe 即可，**永远不需要重建 `.env`**。
+### Contribute a channel
 
-### 贡献新渠道
+PRs against `data/channels.json`, hard requirements:
 
-给 `data/channels.json` 提 PR，硬性标准：
-
-1. **官方免费层或明确公示的试用额度**（合规红线）
-2. 提供 OpenAI 兼容 chat completions 端点者优先（可被自动探活）
-3. 如实标注 `cn_access`（direct/intl）与 `bonus_once`（是否一次性赠送）
-
-### Roadmap
-
-- [ ] CN-side 双端探活：国内节点二次校验「大陆直连可达性」（现有 CI 无法覆盖）
-- [ ] history.jsonl → 每渠道近 30 次趋势 sparkline
-- [ ] Ollama/自有模型的私有部署面板位
+1. **Officially published free tier or trial credit** (compliance red line)
+2. OpenAI-compatible chat completions endpoint preferred (so it can be probed)
+3. Label honestly: `cn_access` (direct/intl) and `bonus_once` (one-shot credit)
 
 </details>
 
-## 免责声明
+## Disclaimer
 
-表格中的免费额度描述为撰写时快照，厂商随时调整，一切以官方页面为准。探活请求极小（8 token），请勿滥用免费额度；本工具不代理、不分发任何密钥。
+Free-tier descriptions above are point-in-time snapshots; vendors change them at will — official pages always win. Probe traffic is tiny (8 tokens); don't abuse free quotas. This tool neither proxies nor distributes any keys.
