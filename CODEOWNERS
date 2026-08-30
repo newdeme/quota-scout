@@ -1,0 +1,15 @@
+# Schema and critical-path files require BDFL review
+# See GOVERNANCE.md Section 3.
+
+# Probe engine and status semantics
+/scripts/probe.py            @newdeme
+
+# Channel handbook (SSOT) — structure and status semantics
+/data/channels.json          @newdeme
+
+# CI pipelines (secrets handling, cron, rendering trigger)
+/.github/workflows/          @newdeme
+
+# Governance documents
+/GOVERNANCE.md               @newdeme
+/CODEOWNERS                  @newdeme

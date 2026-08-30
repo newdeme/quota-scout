@@ -1,0 +1,32 @@
+# NOTICE
+
+This project was formerly developed under the codename **quota-radar**.
+Any references to "quota-radar" in git history or archived materials refer to
+this project.
+
+## Name history
+
+1. `quota-radar` — original working codename (private phase)
+2. `quota-scout` — current and permanent name, adopted before the first public release
+
+The name "quota-radar" was retired deliberately to avoid confusion with other
+projects using similar names.
+
+## Trademark intent
+
+The name **quota-scout**, its logo, and its visual identity are intended to be
+protected as the trademark of this project. You may use the name and logo to
+refer to this project and to attribute its data (as required by
+[DATA-LICENSE.md](./DATA-LICENSE.md)), but you may not use them to brand a
+fork, a derivative service, or in any way that suggests endorsement.
+
+## Third-party services
+
+This repository probes **official public API endpoints** of third-party
+services and lists publicly documented free-tier information about them.
+All provider names and trademarks belong to their respective owners.
+Listing a provider here does not imply any affiliation with, or endorsement
+by, that provider.
+
+Copyright 2026 newdeme (David). Apache-2.0 for code, CC BY 4.0 for data —
+see [LICENSE](./LICENSE) and [DATA-LICENSE.md](./DATA-LICENSE.md).
