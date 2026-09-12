@@ -34,7 +34,7 @@
 |---|---|---|---|---|---|---|---|
 | [SiliconFlow 硅基流动](https://siliconflow.cn/) | `直连✓` | 注册赠送体验金，另有多个常驻免费小模型（Qwen/GLM 小尺寸等）† | ⚪ 待密钥 | — | — | `SILICONFLOW_API_KEY` | [注册](https://cloud.siliconflow.cn/account/ak) |
 | [ModelScope 魔搭社区](https://www.modelscope.cn/) | `直连✓` | 每日免费推理调用次数（刷新制），开源模型数量多，国内访问友好 | ⚪ 待密钥 | — | — | `MODELSCOPE_TOKEN` | [注册](https://www.modelscope.cn/my/myaccesstoken) |
-| [智谱 BigModel 开放平台](https://bigmodel.cn/) | `直连✓` | glm-4-flash 等轻量模型长期免费调用；经标准端点 /api/paas/v4 按量/免费计费，与 GLM Coding/Token 订阅套餐相互隔离（套餐仅限专属端点+指定工具）。另建普通 Key 用于本工具，勿复用订阅 Key | ✅ 验证可用 | 1165 ms | 2026-09-11T21:02:15Z | `ZHIPU_API_KEY` | [注册](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
+| [智谱 BigModel 开放平台](https://bigmodel.cn/) | `直连✓` | glm-4-flash 等轻量模型长期免费调用；经标准端点 /api/paas/v4 按量/免费计费，与 GLM Coding/Token 订阅套餐相互隔离（套餐仅限专属端点+指定工具）。另建普通 Key 用于本工具，勿复用订阅 Key | ✅ 验证可用 | 659 ms | 2026-09-12T04:42:28Z | `ZHIPU_API_KEY` | [注册](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
 | [阿里云百炼 DashScope](https://www.aliyun.com/product/bailian) | `直连✓` | 新用户各主流模型均有限时免费额度，部分通义小模型有常驻免费档† | ⚪ 待密钥 | — | — | `DASHSCOPE_API_KEY` | [注册](https://bailian.console.aliyun.com/?apiKey=1) |
 | [百度千帆 ModelBuilder](https://qianfan.cloud.baidu.com/) | `直连✓` | 部分文心及开源模型提供限时免费试用额度（随活动变化，以控制台为准）† | ⚪ 待密钥 | — | — | `QIANFAN_API_KEY` | [注册](https://console.bce.baidu.com/iam/#/iam/apikey/list) |
 
@@ -42,9 +42,9 @@
 
 | 渠道 | 网络 | 免费方式（快照，以官方为准） | 状态 | 延迟 | 最后探测 (UTC) | 密钥变量 | 注册 |
 |---|---|---|---|---|---|---|---|
-| [Google AI Studio (Gemini API)](https://aistudio.google.com/) | `需国际网络` | 有永久免费层，按模型设每日/每分钟限额，适合个人体验与小规模开发 | ✅ 验证可用 | 412 ms | 2026-09-11T21:02:15Z | `GEMINI_API_KEY` | [注册](https://aistudio.google.com/apikey) |
-| [OpenRouter (:free 模型)](https://openrouter.ai/) | `需国际网络` | 带 :free 后缀的模型可免费调用（每日限额）；需注册并配置 API Key，2026-08 实测匿名调用已返回 401 | 🏷️ 模型待更新 | 100 ms | 2026-09-11T21:02:15Z | `OPENROUTER_API_KEY` | [注册](https://openrouter.ai/settings/keys) |
-| [Groq Cloud](https://groq.com/) | `需国际网络` | 开发者免费层，速率受限但长期可用；2026-08 目录以 gpt-oss/qwen/compound 系为主（llama 已下架） | ✅ 验证可用 | 285 ms | 2026-09-11T21:02:15Z | `GROQ_API_KEY` | [注册](https://console.groq.com/keys) |
+| [Google AI Studio (Gemini API)](https://aistudio.google.com/) | `需国际网络` | 有永久免费层，按模型设每日/每分钟限额，适合个人体验与小规模开发 | ✅ 验证可用 | 418 ms | 2026-09-12T04:42:28Z | `GEMINI_API_KEY` | [注册](https://aistudio.google.com/apikey) |
+| [OpenRouter (:free 模型)](https://openrouter.ai/) | `需国际网络` | 带 :free 后缀的模型可免费调用（每日限额）；需注册并配置 API Key，2026-08 实测匿名调用已返回 401 | 🏷️ 模型待更新 | 96 ms | 2026-09-12T04:42:28Z | `OPENROUTER_API_KEY` | [注册](https://openrouter.ai/settings/keys) |
+| [Groq Cloud](https://groq.com/) | `需国际网络` | 开发者免费层，速率受限但长期可用；2026-08 目录以 gpt-oss/qwen/compound 系为主（llama 已下架） | ✅ 验证可用 | 205 ms | 2026-09-12T04:42:28Z | `GROQ_API_KEY` | [注册](https://console.groq.com/keys) |
 | [Cerebras Inference](https://cloud.cerebras.ai/) | `需国际网络` | 免费层提供每日较大 token 配额，主打超高速推理 | ⚪ 待密钥 | — | — | `CEREBRAS_API_KEY` | [注册](https://cloud.cerebras.ai/) |
 | [Mistral La Plateforme](https://mistral.ai/) | `需国际网络` | 免费模式默认开启（无需信用卡），有限速；在 Studio 控制台创建 API Key | ⚪ 待密钥 | — | — | `MISTRAL_API_KEY` | [注册](https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key) |
 | [NVIDIA NIM (build.nvidia.com)](https://build.nvidia.com/) | `需国际网络` | 开发者计划赠送大量推理调用额度，开源模型家族齐全 | ⚪ 待密钥 | — | — | `NVIDIA_API_KEY` | [注册](https://build.nvidia.com/explore/discover) |
