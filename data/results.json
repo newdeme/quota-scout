@@ -1,91 +1,91 @@
 {
-  "generated_at": "2026-10-29T06:35:25Z",
+  "generated_at": "2026-10-29T12:32:42Z",
   "results": [
     {
       "id": "google-ai-studio",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "ok",
-      "latency_ms": 384,
+      "latency_ms": 562,
       "detail": "HTTP 200"
     },
     {
       "id": "openrouter",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "bad_model",
-      "latency_ms": 110,
+      "latency_ms": 114,
       "detail": "HTTP 404"
     },
     {
       "id": "groq",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "ok",
-      "latency_ms": 163,
+      "latency_ms": 168,
       "detail": "HTTP 200"
     },
     {
       "id": "cerebras",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 CEREBRAS_API_KEY"
     },
     {
       "id": "mistral",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 MISTRAL_API_KEY"
     },
     {
       "id": "nvidia-nim",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 NVIDIA_API_KEY"
     },
     {
       "id": "github-models",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 GITHUB_MODELS_TOKEN"
     },
     {
       "id": "huggingface-router",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 HF_TOKEN"
     },
     {
       "id": "siliconflow",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 SILICONFLOW_API_KEY"
     },
     {
       "id": "modelscope",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 MODELSCOPE_TOKEN"
     },
     {
       "id": "zhipu-bigmodel",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "auth_invalid",
-      "latency_ms": 693,
+      "latency_ms": 898,
       "detail": "HTTP 401 密钥被拒"
     },
     {
       "id": "dashscope-bailian",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 DASHSCOPE_API_KEY"
     },
     {
       "id": "qianfan",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_key",
       "detail": "未配置 QIANFAN_API_KEY"
     },
     {
       "id": "workers-ai",
-      "ts": "2026-10-29T06:35:25Z",
+      "ts": "2026-10-29T12:32:42Z",
       "state": "no_probe",
       "detail": "手册收录（暂无自动探活）"
     }
