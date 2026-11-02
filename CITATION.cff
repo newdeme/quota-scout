@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use quota-scout data or code, please cite it as below."
+title: quota-scout
+authors:
+  - family-names: Chang
+    given-names: Sheng
+    orcid: "https://orcid.org/0000-0002-4935-2766"
+    website: "https://github.com/newdeme"
+type: software
+repository-code: "https://github.com/newdeme/quota-scout"
+license: Apache-2.0
+abstract: >-
+  An honest dashboard of free-tier AI API quotas: every status comes from
+  scripted probes of official public endpoints, never from marketing claims.
+  Code is Apache-2.0; data is CC BY 4.0 (see DATA-LICENSE.md).

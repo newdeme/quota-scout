@@ -8,7 +8,6 @@
 
 [English](README.md) · **简体中文**
 
-<!-- 徽章在仓库转公开后自动亮起（shields 需匿名读取 raw JSON）；无需改代码
 <p>
   <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/newdeme/quota-scout/main/data/badge-alive.json&style=for-the-badge" alt="alive">
   &nbsp;
@@ -16,7 +15,6 @@
   &nbsp;
   <img src="https://img.shields.io/github/actions/workflow/status/newdeme/quota-scout/probe.yml?style=for-the-badge" alt="CI">
 </p>
--->
 
 <img src="assets/radar.svg" width="340" alt="quota-scout 探活雷达图：每个光点是一个免费渠道，距离圆心越近延迟越低，菱形框=国内直连，圆形=国际">
 

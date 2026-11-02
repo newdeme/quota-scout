@@ -8,7 +8,6 @@
 
 **English** · [简体中文](README.zh-CN.md)
 
-<!-- Badges light up automatically once the repo goes public (shields needs anonymous raw access); no code change required
 <p>
   <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/newdeme/quota-scout/main/data/badge-alive.json&style=for-the-badge" alt="alive">
   &nbsp;
@@ -16,7 +15,6 @@
   &nbsp;
   <img src="https://img.shields.io/github/actions/workflow/status/newdeme/quota-scout/probe.yml?style=for-the-badge" alt="CI">
 </p>
--->
 
 <img src="assets/radar.svg" width="340" alt="quota-scout live radar: one blip per channel, closer to center = lower latency, diamond ring = mainland-direct, circle = global">
 
