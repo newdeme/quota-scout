@@ -21,10 +21,10 @@ STATE_EN = {"ok": "verified", "anon_ok": "anon OK", "rate_limited": "rate-limite
             "no_probe": "doc-only"}
 
 HEAD_CN = ("| 渠道 | 网络 | 免费方式（快照，以官方为准） | 状态 | 延迟 "
-           "| 最后探测 (UTC) | 密钥变量 | 注册 |\n"
+           "| 最后验证可用 (UTC) | 密钥变量 | 注册 |\n"
            "|---|---|---|---|---|---|---|---|")
 HEAD_EN = ("| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency "
-           "| Last probe (UTC) | Key var | Sign up |\n"
+           "| Last verified OK (UTC) | Key var | Sign up |\n"
            "|---|---|---|---|---|---|---|---|")
 
 SECTIONS = {
@@ -41,6 +41,24 @@ SIGNUP = {"zh": "注册", "en": "Sign up"}
 conf = json.loads((ROOT / "data" / "channels.json").read_text())
 results = {r["id"]: r for r in json.loads(
     (ROOT / "data" / "results.json").read_text())["results"]}
+
+
+def last_verified():
+    """每渠道最近一次 ok/anon_ok 的时间戳（来自 history.jsonl，再并入本轮结果）。"""
+    out = {}
+    hist = ROOT / "data" / "history.jsonl"
+    for line in hist.read_text().splitlines() if hist.exists() else []:
+        if line.strip():
+            e = json.loads(line)
+            if e.get("state") in ("ok", "anon_ok"):
+                out[e["id"]] = max(out.get(e["id"], ""), e["ts"])
+    for k, r in results.items():
+        if r.get("state") in ("ok", "anon_ok"):
+            out[k] = max(out.get(k, ""), r["ts"])
+    return out
+
+
+VERIFIED = last_verified()
 groups = {"cn": [c for c in conf["channels"] if c["cn_access"] == "direct"],
           "intl": [c for c in conf["channels"] if c["cn_access"] == "intl"]}
 
@@ -49,7 +67,6 @@ def row(ch: dict, lang: str) -> str:
     r = results.get(ch["id"], {})
     state = r.get("state", "down")
     lat = r.get("latency_ms")
-    probed = state not in ("no_key", "no_probe")
     labels = STATE_CN if lang == "zh" else STATE_EN
     dagger = "†" if ch.get("bonus_once") else ""
     tier = ch[TIER_KEY[lang]] + dagger
@@ -57,7 +74,7 @@ def row(ch: dict, lang: str) -> str:
     return (f"| [{name}]({ch['home']}) | {NET[lang][ch['cn_access']]} | {tier} "
             f"| {ICON[state]} {labels[state]} "
             f"| {str(lat)+' ms' if lat else '—'} "
-            f"| {r.get('ts', '—') if probed else '—'} "
+            f"| {VERIFIED.get(ch['id'], '—')} "
             f"| `{ch.get('key_env') or '—'}` | [{SIGNUP[lang]}]({ch['key_signup']}) |")
 
 
