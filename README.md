@@ -20,6 +20,9 @@
 
 </div>
 
+> [!TIP]
+> **Know a free LLM tier that's missing, or a quota that changed?** [Report a channel](https://github.com/newdeme/quota-scout/issues/new?template=channel_report.md) · **Help wanted:** a mainland-China-side prober (see [ROADMAP](ROADMAP.md)).
+
 🇨🇳 **Mainland users: start with the first table, zero extra networking needed. 🌍 The global table is more powerful but network-dependent.**
 
 > [!NOTE]
@@ -28,20 +31,20 @@
 <!-- RADAR:START -->
 ### 🇨🇳 China-direct · works from mainland networks
 
-| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency | Last probe (UTC) | Key var | Sign up |
+| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency | Last verified OK (UTC) | Key var | Sign up |
 |---|---|---|---|---|---|---|---|
 | [SiliconFlow](https://siliconflow.cn/) | `direct ✓` | Sign-up bonus credits plus always-free small models (small Qwen/GLM sizes)† | ⚪ awaiting key | — | — | `SILICONFLOW_API_KEY` | [Sign up](https://cloud.siliconflow.cn/account/ak) |
 | [ModelScope](https://www.modelscope.cn/) | `direct ✓` | Daily-refreshed free inference calls; huge open-model catalog, mainland-friendly | ⚪ awaiting key | — | — | `MODELSCOPE_TOKEN` | [Sign up](https://www.modelscope.cn/my/myaccesstoken) |
-| [Zhipu AI Open Platform (BigModel)](https://bigmodel.cn/) | `direct ✓` | Lightweight glm models (e.g. glm-4-flash) free for the long run via the standard /api/paas/v4 endpoint — billed separately from GLM Coding/Token plans; use a normal API key here, never your plan key | 🔑 key rejected | 619 ms | 2026-11-06T12:25:44Z | `ZHIPU_API_KEY` | [Sign up](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
+| [Zhipu AI Open Platform (BigModel)](https://bigmodel.cn/) | `direct ✓` | Lightweight glm models (e.g. glm-4-flash) free for the long run via the standard /api/paas/v4 endpoint — billed separately from GLM Coding/Token plans; use a normal API key here, never your plan key | 🔑 key rejected | 619 ms | 2026-09-12T20:38:34Z | `ZHIPU_API_KEY` | [Sign up](https://bigmodel.cn/usercenter/proj-mgmt/apikeys) |
 | [Alibaba Cloud Bailian (DashScope)](https://www.aliyun.com/product/bailian) | `direct ✓` | Time-limited free quota per model for new users†; some small Qwen tiers stay free long-run† | ⚪ awaiting key | — | — | `DASHSCOPE_API_KEY` | [Sign up](https://bailian.console.aliyun.com/?apiKey=1) |
 | [Baidu Qianfan ModelBuilder](https://qianfan.cloud.baidu.com/) | `direct ✓` | Activity-based free trials on selected ERNIE/open models (varies — see console)† | ⚪ awaiting key | — | — | `QIANFAN_API_KEY` | [Sign up](https://console.bce.baidu.com/iam/#/iam/apikey/list) |
 
 ### 🌍 Global · usually needs international networking
 
-| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency | Last probe (UTC) | Key var | Sign up |
+| Channel | Network | Free tier (snapshot; official pages win) | Status | Latency | Last verified OK (UTC) | Key var | Sign up |
 |---|---|---|---|---|---|---|---|
 | [Google AI Studio (Gemini API)](https://aistudio.google.com/) | `intl net` | Permanent free tier with per-model daily/RPM limits — solid for personal use & prototyping | ✅ verified | 440 ms | 2026-11-06T12:25:44Z | `GEMINI_API_KEY` | [Sign up](https://aistudio.google.com/apikey) |
-| [OpenRouter (:free models)](https://openrouter.ai/) | `intl net` | Models suffixed :free are callable at no cost (daily caps); a normal API key is required — anonymous access returned 401 as of 2026-08 | 🏷️ stale model | 120 ms | 2026-11-06T12:25:44Z | `OPENROUTER_API_KEY` | [Sign up](https://openrouter.ai/settings/keys) |
+| [OpenRouter (:free models)](https://openrouter.ai/) | `intl net` | Models suffixed :free are callable at no cost (daily caps); a normal API key is required — anonymous access returned 401 as of 2026-08 | 🏷️ stale model | 120 ms | 2026-09-21T01:06:50Z | `OPENROUTER_API_KEY` | [Sign up](https://openrouter.ai/settings/keys) |
 | [Groq Cloud](https://groq.com/) | `intl net` | Long-lived developer free tier, rate-limited; 2026-08 catalog led by gpt-oss/qwen (llama retired from the free list) | ✅ verified | 242 ms | 2026-11-06T12:25:44Z | `GROQ_API_KEY` | [Sign up](https://console.groq.com/keys) |
 | [Cerebras Inference](https://cloud.cerebras.ai/) | `intl net` | Free tier with a generous daily token allowance; famously fast inference | ⚪ awaiting key | — | — | `CEREBRAS_API_KEY` | [Sign up](https://cloud.cerebras.ai/) |
 | [Mistral La Plateforme](https://mistral.ai/) | `intl net` | Free plan on by default (no credit card), rate-limited; create keys in the Studio console | ⚪ awaiting key | — | — | `MISTRAL_API_KEY` | [Sign up](https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key) |
@@ -64,6 +67,8 @@
 | 🟢 | Anonymous call succeeded | 🏷️ | Stale model ID, needs update |
 | 🟡 | 429 rate-limited — service itself healthy | 💸 | Quota spent |
 | ⚪ | No key configured, skipped | ❌ | Down (network / 5xx) |
+
+*Last verified OK* = the most recent probe where the call succeeded (✅/🟢); “—” means never verified yet.
 
 On the radar: **diamond ring = mainland-direct channels, circle = global channels**; closer to center = lower latency; hollow blips are untested.
 
