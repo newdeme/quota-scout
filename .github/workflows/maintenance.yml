@@ -1,0 +1,102 @@
+name: maintenance
+
+# 每日：看门狗（探测是否停摆）。每月 1 日：上月变更简报 → CHANGELOG + GitHub Release。
+# 两者都是"仓库可见活动"，同时让项目有可见的更新记录。
+
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Digest month YYYY-MM (default: previous month). Leave empty for watchdog only."
+        required: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: quota-maintenance
+  cancel-in-progress: false
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 200   # 需要足够历史才能找到最近一次 probe 提交
+      - name: Probe freshness (alert if no probe commit for > 36 h)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          last=$(git log -1 --format=%ct --grep='^probe: refresh quota status')
+          now=$(date +%s)
+          age_h=$(( (now - ${last:-0}) / 3600 ))
+          echo "last probe commit age: ${age_h}h"
+          gh label create probe-failure --color B60205 \
+            --description "Automated: probe run failed or all probed channels down" --force
+          n=$(gh issue list --label probe-failure --state open --json number -q '.[0].number')
+          if [ "$age_h" -gt 36 ]; then
+            msg="No probe commit for ${age_h} h (expected every 6 h). Scheduled workflows may have been disabled. Check Actions: $RUN_URL"
+            if [ -n "$n" ]; then gh issue comment "$n" --body "$msg"
+            else gh issue create --title "Probe alert: radar needs attention" --label probe-failure --body "$msg"; fi
+            exit 1
+          fi
+
+  digest:
+    # 每日触发；定时运行仅在每月 1 日真正生成（见 gate 步骤），手动触发可指定月份
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gate to day 1 of the month (scheduled runs only)
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%d)" != "01" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == 'true'
+        with:
+          python-version: "3.12"
+      - name: Build digest
+        if: steps.gate.outputs.run == 'true'
+        id: digest
+        env:
+          MONTH: ${{ github.event.inputs.month }}
+        run: |
+          args=""
+          [ -n "$MONTH" ] && args="--month $MONTH"
+          out=$(python3 scripts/digest.py $args --notes-file "$RUNNER_TEMP/notes.md" | tail -1)
+          echo "$out"
+          echo "month=$(echo "$out" | sed -E 's/.*month=([0-9-]+).*/\1/')" >> "$GITHUB_OUTPUT"
+          echo "changed=$(echo "$out" | sed -E 's/.*changed=([01]).*/\1/')" >> "$GITHUB_OUTPUT"
+      - name: Commit CHANGELOG
+        if: steps.gate.outputs.run == 'true' && steps.digest.outputs.changed == '1'
+        run: |
+          git config user.name "quota-radar[bot]"
+          git config user.email "actions@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "docs: radar digest ${{ steps.digest.outputs.month }}"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push
+      - name: Create GitHub Release (idempotent)
+        if: steps.gate.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="radar-${{ steps.digest.outputs.month }}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "release $tag exists, skipping"
+          else
+            gh release create "$tag" --title "Radar digest ${{ steps.digest.outputs.month }}" \
+              --notes-file "$RUNNER_TEMP/notes.md" --latest=false
+          fi

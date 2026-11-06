@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: quota-probe
@@ -55,4 +56,42 @@ jobs:
           else
             git commit -m "probe: refresh quota status ($(date -u +%FT%TZ))"
             git push
+          fi
+
+      # ── 告警（保险一）：同一个 issue 去重，恢复后自动关闭；只写状态摘要，不含密钥/响应体 ──
+      - name: Assess probe health
+        id: health
+        if: success()
+        run: echo "status=$(python3 scripts/alert.py)" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update alert issue
+        if: failure() || steps.health.outputs.status == 'degraded'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          HEALTH: ${{ steps.health.outputs.status }}
+        run: |
+          gh label create probe-failure --color B60205 \
+            --description "Automated: probe run failed or all probed channels down" --force
+          if [ "$HEALTH" = "degraded" ]; then
+            msg="All probed channels are unavailable in this run (possible platform/network/key-wide problem). Run: $RUN_URL"
+          else
+            msg="The probe workflow failed before finishing. Run: $RUN_URL"
+          fi
+          n=$(gh issue list --label probe-failure --state open --json number -q '.[0].number')
+          if [ -n "$n" ]; then
+            gh issue comment "$n" --body "$msg"
+          else
+            gh issue create --title "Probe alert: radar needs attention" --label probe-failure --body "$msg"
+          fi
+
+      - name: Close alert issue on recovery
+        if: success() && steps.health.outputs.status == 'healthy'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          n=$(gh issue list --label probe-failure --state open --json number -q '.[0].number')
+          if [ -n "$n" ]; then
+            gh issue close "$n" --comment "Recovered: probe healthy again. Run: $RUN_URL"
           fi
