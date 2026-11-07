@@ -21,7 +21,7 @@
 </div>
 
 > [!TIP]
-> **发现缺失的免费渠道，或额度变了？** [提交渠道](https://github.com/newdeme/quota-scout/issues/new?template=channel_report.md) · **欢迎认领：** 大陆侧直连探测脚本（见 [ROADMAP](ROADMAP.md)）。
+> **发现缺失的免费渠道，或额度变了？** [提交渠道](https://github.com/newdeme/quota-scout/issues/new?template=channel_report.md) · **欢迎认领：** 大陆侧直连探测脚本（见 [issue #2](https://github.com/newdeme/quota-scout/issues/2) 与 [ROADMAP](ROADMAP.md)）。
 
 🇨🇳 **国内用户看第一节即可零门槛开嫖；🌍 国际节能力更强但依赖网络环境。**
 

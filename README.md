@@ -21,7 +21,7 @@
 </div>
 
 > [!TIP]
-> **Know a free LLM tier that's missing, or a quota that changed?** [Report a channel](https://github.com/newdeme/quota-scout/issues/new?template=channel_report.md) · **Help wanted:** a mainland-China-side prober (see [ROADMAP](ROADMAP.md)).
+> **Know a free LLM tier that's missing, or a quota that changed?** [Report a channel](https://github.com/newdeme/quota-scout/issues/new?template=channel_report.md) · **Help wanted:** a mainland-China-side prober (see [issue #2](https://github.com/newdeme/quota-scout/issues/2) and [ROADMAP](ROADMAP.md)).
 
 🇨🇳 **Mainland users: start with the first table, zero extra networking needed. 🌍 The global table is more powerful but network-dependent.**
 
